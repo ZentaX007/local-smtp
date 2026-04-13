@@ -61,7 +61,7 @@ def get_html_wrapper(subject: str, message: str, from_name: str) -> str:
         safe_url = html.escape(url)
         button_html = f"""
             <div style="text-align:center;margin:32px 0 16px;">
-                <a href="{safe_url}" style="display:inline-block;padding:14px 36px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;text-decoration:none;border-radius:10px;font-weight:600;font-size:15px;letter-spacing:0.3px;">Click Here →</a>
+                <a href="{safe_url}" style="display:inline-block;padding:14px 36px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;text-decoration:none;border-radius:10px;font-weight:600;font-size:15px;letter-spacing:0.3px;">Click Here to Visit Website</a>
             </div>
         """
         
@@ -101,6 +101,7 @@ def get_html_wrapper(subject: str, message: str, from_name: str) -> str:
 </html>"""
 
 @app.post("/send-email")
+@app.post("/api/send-email")
 async def send_email(request: EmailRequest):
     if not request.message and not request.html_content:
         raise HTTPException(status_code=400, detail="Either message (plain text) or html_content must be provided.")
